@@ -12,6 +12,23 @@
   var pickerApiLoaded = false;
   var oauthToken;
 
+  // Preps the google login dropdown
+  $(document).ready(function(){
+      $('#googleDivider').hide();
+      $('#nameLink').hide();
+      $('#logOut').hide();
+      $('#gdrive').show();
+  });
+
+  //When user presses logout, hide unnecessary information
+  logOut = function() {
+      $('#googleDivider').hide();
+      $('#nameLink').hide();
+      $('#logOut').hide();
+      $('#gdrive').show();
+
+  }
+
   // Use the API Loader script to load google.picker and gapi.auth.
   onApiLoad = function() {
     gapi.load('auth', {'callback': onAuthApiLoad});
@@ -111,6 +128,9 @@
        if(name !== 'undefined'){
          $('#nameLink').html('Hello ' + name);
          $('#nameLink').show();
+         $('#googleDivider').show();
+         $('#gdrive').hide();
+         $('#logOut').show();
        } else if (name == 'undefined'){
          $('#nameLink').hide();
        }
