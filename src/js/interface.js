@@ -402,7 +402,7 @@ window.addEventListener("load", function() {
 
     function changeCell(){
         var tableCell = getCurrentCell();
-        tableCell.focus();
+        tableCell.focus(); /* Is this really needed... */
         $(tableCell).addClass("selectedCell");
     }
 
