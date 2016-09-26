@@ -303,9 +303,11 @@ window.addEventListener("load", function() {
             }
 
             memory.appendChild(tr);
+
         }
 
         memoryContainer.style.display = "inline-block";
+        changeCell();
     }
 
     function finishInputReplaceMemoryCell() {
@@ -377,6 +379,7 @@ window.addEventListener("load", function() {
         }
     });
 
+
     memory.addEventListener("keypress", function(e) {
         if(e.which === 13 && e.target && e.target.parentNode.classList.contains("cell")) {
             finishInputReplaceMemoryCell();
@@ -385,6 +388,49 @@ window.addEventListener("load", function() {
 
     document.addEventListener("click", function() {
         finishInputReplaceMemoryCell();
+    });
+
+    /* begin POC code for cell navigation */
+    var currentRow = 0;
+    var currentCell = 0;
+
+    function getCurrentCell(){
+        var tableRow = document.getElementById("memory").getElementsByTagName("tr")[currentRow];
+        var tableCell = tableRow.childNodes[currentCell];
+        return tableCell;
+    }
+
+    function changeCell(){
+        var tableCell = getCurrentCell();
+        tableCell.focus();
+        $(tableCell).addClass("selectedCell");
+    }
+
+    $(document).keydown(function(e){
+        if (e.keyCode == 37) {
+           $(getCurrentCell()).removeClass("selectedCell");
+           currentCell--;
+           changeCell();
+           return false;
+        }
+        if (e.keyCode == 38) {
+           $(getCurrentCell()).removeClass("selectedCell");
+           currentRow--;
+           changeCell();
+           return false;
+        }
+        if (e.keyCode == 39) {
+           $(getCurrentCell()).removeClass("selectedCell");
+           currentCell++;
+           changeCell();
+           return false;
+        }
+        if (e.keyCode == 40) {
+           $(getCurrentCell()).removeClass("selectedCell");
+           currentRow++;
+           changeCell();
+           return false;
+        }
     });
 
 

@@ -521,3 +521,8 @@ codeblock {
 .simComponents{
   resize: both;
 }
+
+.selectedCell {
+    border: 1px solid blue;
+    border-style: double;
+}
